@@ -46,6 +46,13 @@ jobs:
         run: coverage run test.py #python test.py
         env:
           COVERAGE_FILE: ".coverage.${{ matrix.python-version }}"
+          
+      - name: Store coverage file
+        uses: actions/upload-artifact@v3.1.2
+        with:
+          name: coverage
+          path: .coverage.${{ matrix.python-version }}
+          
   coverage:      
     name: Coverage
     runs-on: ubuntu-latest
