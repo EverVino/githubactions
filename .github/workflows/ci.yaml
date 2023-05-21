@@ -5,12 +5,19 @@ jobs:
   linter-actions:
     name: linter code base
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: read
+      statuses: write
     steps:
       - name: Checking code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
       
       - name: Run super-linter
-        uses: github/super-linter@v3
+        uses: github/super-linter@v5
         env:
+          VALIDATE_ALL_CODEBASE: false
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
