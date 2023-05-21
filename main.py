@@ -5,4 +5,4 @@ def despedida(name):
 
 def saludos(name):
     print(f"saludos {name}")
-    return f"Hasta luego {name}"
+    return f"saludos {name}"
