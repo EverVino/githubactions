@@ -1,12 +1,18 @@
-name: super-test
-on: push
+name: CI
+
+on: 
+  pull_request:
+  push:
+    branches:
+      - 'main'
 
 jobs:
   linter-actions:
     name: linter code base
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      pull-requests: write
+      contents: write
       packages: read
       statuses: write
     steps:
@@ -28,7 +34,6 @@ jobs:
         uses: py-cov-action/python-coverage-comment-action@v3
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          VERBOSE: true
         env:
           ACTIONS_RUNNER_DEBUG: true
 
