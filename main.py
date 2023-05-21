@@ -7,7 +7,5 @@ def despedida(name):
 
     
 saludos("Ever")
+
 despedida("John")
-
-
-  
