@@ -17,15 +17,6 @@ jobs:
         with:
           fetch-depth: 0
           
-      - name: Set up Python
-        id: setup-python
-        uses: actions/setup-python@v4
-        with:
-          python-version: 3
-
-      - name: Launch test
-        run: python test.py
-      
       - name: Run super-linter
         uses: super-linter/super-linter/slim@v5
         env:
@@ -34,13 +25,22 @@ jobs:
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
+      - name: Set up Python
+        id: setup-python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3
+
+      - name: Launch test
+        run: python test.py
+          
       - name: Coverage comment
         id: coverage_comment
         uses: py-cov-action/python-coverage-comment-action@v3
         with:
           GITHUB_TOKEN: ${{ github.token }}
-        env:
-          ACTIONS_RUNNER_DEBUG: true
+        #env:
+          #ACTIONS_RUNNER_DEBUG: true
 
       - name: Store Pull Request comment to be posted
         uses: actions/upload-artifact@v3
